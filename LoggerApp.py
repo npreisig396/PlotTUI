@@ -4,9 +4,15 @@ from textual.widgets import Footer, Header
 from textual_plotext import PlotextPlot
 from textual.containers import Grid
 
+def visualize(keys):
+    def wrapper(func):
+        LoggerApp(keys,func).run()
+    return wrapper 
+
 class LoggerApp(App):
     def __init__(self,keys,func):
         super().__init__()
+        self.title = 'PlotTUI'
         self.t = threading.Thread(target=func, args=(self,))
         self.keys = keys
 
