@@ -2,6 +2,7 @@ import time
 from LoggerApp import visualize
 import sys
 
+
 @visualize(['epoch','loss','loss2'])
 def main(logger=None):
     epoch = 1

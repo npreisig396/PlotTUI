@@ -2,24 +2,29 @@ import threading
 from textual.app import App
 from textual.widgets import Footer, Header
 from textual_plotext import PlotextPlot
-from textual.containers import Grid
+from textual.containers import VerticalScroll
 
-def visualize(keys):
+def visualize(keys,daemon=False):
     def wrapper(func):
-        LoggerApp(keys,func).run()
+        def run():
+            LoggerApp(keys,func,daemon).run()
+        return run
     return wrapper 
 
 class LoggerApp(App):
-    def __init__(self,keys,func):
+    def __init__(self,keys,func,daemon=True):
         super().__init__()
         self.title = 'PlotTUI'
-        self.t = threading.Thread(target=func, args=(self,))
+        self.t = threading.Thread(target=func, kwargs={'logger':self}, daemon=daemon)
         self.keys = keys
 
     def compose(self):
         yield Header()
+        #yield VerticalScroll(UpdatingPlot('epoch'),UpdatingPlot('loss'),UpdatingPlot('loss2'))
+        
         for key in self.keys: 
             yield UpdatingPlot(key)
+
         yield Footer()
 
     def on_ready(self):
