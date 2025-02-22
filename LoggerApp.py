@@ -4,7 +4,7 @@ from textual.widgets import Footer, Header
 from textual_plotext import PlotextPlot
 from textual.containers import VerticalScroll
 
-def visualize(keys,daemon=False):
+def visualize(keys,daemon=True):
     def wrapper(func):
         def run():
             LoggerApp(keys,func,daemon).run()
@@ -12,6 +12,17 @@ def visualize(keys,daemon=False):
     return wrapper 
 
 class LoggerApp(App):
+    CSS = """
+    VerticalScroll {
+        scrollbar-color: cyan;
+    } 
+
+    UpdatingPlot {
+        height: 20;
+    }
+    """
+
+
     def __init__(self,keys,func,daemon=True):
         super().__init__()
         self.title = 'PlotTUI'
@@ -20,11 +31,7 @@ class LoggerApp(App):
 
     def compose(self):
         yield Header()
-        #yield VerticalScroll(UpdatingPlot('epoch'),UpdatingPlot('loss'),UpdatingPlot('loss2'))
-        
-        for key in self.keys: 
-            yield UpdatingPlot(key)
-
+        yield VerticalScroll(*tuple([UpdatingPlot(key) for key in self.keys]))
         yield Footer()
 
     def on_ready(self):

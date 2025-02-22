@@ -3,7 +3,7 @@ from LoggerApp import visualize
 import sys
 
 
-@visualize(['epoch','loss','loss2'])
+@visualize(['epoch','loss','loss2','loss3','loss4','loss5'])
 def main(logger=None):
     epoch = 1
     while epoch <= 50:
