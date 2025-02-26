@@ -9,6 +9,8 @@ def main(logger=None):
     while epoch <= 50:
         loss = 100/epoch
         if logger:
+            if epoch % 2 == 0:
+                logger.logval('loss3',epoch,loss)
             logger.logval('epoch',epoch,epoch)
             logger.logval('loss',epoch,loss)
             logger.logval('loss2',epoch,loss)
