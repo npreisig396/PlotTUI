@@ -1,0 +1,8 @@
+setup.py
+PlotTUI/LoggerApp.py
+PlotTUI/ToyPipeline.py
+PlotTUI/__init__.py
+PlotTUI.egg-info/PKG-INFO
+PlotTUI.egg-info/SOURCES.txt
+PlotTUI.egg-info/dependency_links.txt
+PlotTUI.egg-info/top_level.txt
