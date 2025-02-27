@@ -23,8 +23,8 @@ class LoggerApp(App):
     }
 
     ImgQueue {
-        height: 30;
-        width: 60;
+        height: 40;
+        width: 100;
     }
     """
 
@@ -104,7 +104,7 @@ class ImgQueue(PlotextPlot):
 
     def on_mount(self):
         self.plt.title(self._title)
-        self.plt.plot_size(10,20)
+        self.plt.plot_size(40,100)
 
     def update(self,img_path): 
         self.plt.image_plot(img_path,fast=True)
